@@ -1,0 +1,57 @@
+:root {
+    --primary: #D90000;
+    --primary-light: #FF4D4D;
+    --danger: #D90000;
+}
+
+/* Customizing the Jazzmin/AdminLTE components to match Adietalk Radio precise red colors */
+
+/* Login box and buttons */
+.btn-primary, .btn-danger {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+.btn-primary:hover, .btn-danger:hover {
+    background-color: var(--primary-light) !important;
+    border-color: var(--primary-light) !important;
+}
+
+/* Top Navbar */
+.navbar-danger {
+    background-color: var(--primary) !important;
+}
+
+/* Brand Logo area */
+[class*='navbar-'] .navbar-brand {
+    color: white !important;
+}
+
+/* Sidebar active item */
+.sidebar-dark-danger .nav-sidebar > .nav-item > .nav-link.active, 
+.sidebar-light-danger .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: var(--primary) !important;
+    color: #ffffff !important;
+}
+
+/* Breadcrumbs and Links */
+a {
+    color: var(--primary);
+}
+
+a:hover {
+    color: var(--primary-light);
+}
+
+/* Checkboxes and interactive elements */
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: var(--primary) !important;
+    background-color: var(--primary) !important;
+}
+
+/* Make logo fit nicely */
+.brand-image {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}

@@ -1,0 +1,48 @@
+/* Custom CSS to match the requested design in Django Unfold */
+
+/* Sidebar Background - Dark Charcoal like the image */
+aside {
+    background-color: #1a1c23 !important; /* Very dark */
+}
+
+/* Sidebar Text and Icons */
+aside span, aside a, aside h3 {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+aside a:hover, aside a.active {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #fff !important;
+}
+
+/* Sidebar Active Item Indicator */
+aside a.active {
+    border-left: 3px solid #C0392B !important;
+}
+
+/* Main Background - Clean light grey */
+body.unfold {
+    background-color: #f4f7f6 !important;
+}
+
+/* Cards - White with subtle shadow as in image */
+.bg-white {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    border-radius: 0.75rem !important;
+}
+
+/* Top Header */
+header {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #edf2f7 !important;
+}
+
+/* Stats Progress Bars */
+.bg-primary-500 {
+    background-color: #C0392B !important;
+}
+
+/* Custom Red Accents */
+.text-primary-500 {
+    color: #C0392B !important;
+}

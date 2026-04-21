@@ -1,0 +1,22 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+static_root/
+
+# Environment
+.env
+venv/
+ENV/
+env/
+
+# OS
+.DS_Store
+
+# Scrips
+push_backend.sh

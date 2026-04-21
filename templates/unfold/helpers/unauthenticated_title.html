@@ -1,0 +1,14 @@
+{% load i18n static %}
+
+<div class="border-b border-base-200 mb-8 pb-6 dark:border-base-800 flex flex-col items-center text-center">
+    <!-- AdieTalkRadio Logo above the title -->
+    <img src="{% static 'images/logo.png' %}" alt="AdieTalkRadio Logo" class="h-24 w-auto object-contain mb-4">
+    
+    <h1 class="font-semibold w-full">
+        {% if subtitle %}
+            <span class="block text-font-important-light dark:text-font-important-dark">{{ subtitle }} </span>
+        {% endif %}
+
+        <span class="block font-semibold text-primary-600 tracking-tight text-xl dark:text-primary-500">{{ title }}</span>
+    </h1>
+</div>
