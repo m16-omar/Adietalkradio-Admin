@@ -16,15 +16,24 @@ def dashboard_callback(request, context):
         "total_team": TeamMember.objects.count(),
     })
 
-    # Weekly Registration Stats (for a chart)
+    # Real Daily Registration Stats for the last 7 days
     now = timezone.now()
-    week_ago = now - timedelta(days=7)
+    labels = []
+    data = []
     
-    # Example data for a chart (Labels and Values)
-    # In a real app, you'd aggregate data by day
+    for i in range(6, -1, -1):
+        day = now - timedelta(days=i)
+        count = WebinarRegistration.objects.filter(
+            registered_at__year=day.year,
+            registered_at__month=day.month,
+            registered_at__day=day.day
+        ).count()
+        labels.append(day.strftime("%a"))
+        data.append(count)
+        
     context.update({
-        "chart_labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        "chart_data": [12, 19, 3, 5, 2, 3, 10], # Placeholder static data for now
+        "chart_labels": labels,
+        "chart_data": data,
     })
 
     return context
