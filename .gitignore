@@ -8,6 +8,7 @@ db.sqlite3
 db.sqlite3-journal
 media/
 static_root/
+staticfiles/
 
 # Environment
 .env
@@ -18,5 +19,6 @@ env/
 # OS
 .DS_Store
 
-# Scrips
+# Scripts
 push_backend.sh
+deploy.sh
