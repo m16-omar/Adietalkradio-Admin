@@ -45,4 +45,41 @@ header {
 /* Custom Red Accents */
 .text-primary-500 {
     color: #C0392B !important;
+/* Fix missing Tailwind dark mode utilities in Unfold */
+:root[data-theme="dark"] .bg-white,
+html.dark .bg-white,
+body.dark .bg-white {
+    background-color: #1f2937 !important;
+    border-color: #374151 !important;
+}
+
+:root[data-theme="dark"] .text-gray-800,
+html.dark .text-gray-800 {
+    color: #f3f4f6 !important;
+}
+
+:root[data-theme="dark"] .text-gray-500,
+html.dark .text-gray-500 {
+    color: #9ca3af !important;
+}
+
+:root[data-theme="dark"] .bg-gray-50,
+html.dark .bg-gray-50 {
+    background-color: #374151 !important;
+    border-color: #4b5563 !important;
+}
+
+:root[data-theme="dark"] .bg-gray-100,
+html.dark .bg-gray-100 {
+    background-color: #4b5563 !important;
+}
+
+:root[data-theme="dark"] .bg-primary-100,
+html.dark .bg-primary-100 {
+    background-color: rgba(127, 29, 29, 0.3) !important;
+}
+
+:root[data-theme="dark"] .text-primary-600,
+html.dark .text-primary-600 {
+    color: #f87171 !important;
 }

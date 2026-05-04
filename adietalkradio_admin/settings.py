@@ -209,11 +209,7 @@ SIMPLE_JWT = {
 
 # CORS Settings (Allow apps to connect)
 # CORS Settings
-CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://187.124.218.83",
-])
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 from django.urls import reverse_lazy
@@ -276,6 +272,11 @@ UNFOLD = {
                         "title": _("Shows & Schedule"),
                         "icon": "calendar_month",
                         "link": reverse_lazy("admin:radio_show_changelist"),
+                    },
+                    {
+                        "title": _("Archive Shows"),
+                        "icon": "inventory_2",
+                        "link": reverse_lazy("admin:radio_archiveshow_changelist"),
                     },
                     {
                         "title": _("Podcasts"),

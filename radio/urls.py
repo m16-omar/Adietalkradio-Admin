@@ -10,7 +10,8 @@ from .views import (
     TeamMemberViewSet, PromotionSubmitView, PaymentInitializeView, 
     PaymentVerifyView, WebinarRegisterView, UserRegistrationView,
     GoogleAuthView, ActiveWebinarEventView, PastWebinarEventsView, CustomLoginView,
-    PasswordResetRequestView, PasswordResetConfirmView, BroadcastNotificationViewSet
+    PasswordResetRequestView, PasswordResetConfirmView, BroadcastNotificationViewSet,
+    ArchiveShowViewSet
 )
 
 
@@ -22,6 +23,7 @@ router.register(r'news', NewsArticleViewSet, basename='api_news')
 router.register(r'banners', BannerViewSet, basename='banners')
 router.register(r'team', TeamMemberViewSet, basename='team')
 router.register(r'notifications', BroadcastNotificationViewSet, basename='notifications')
+router.register(r'archive-shows', ArchiveShowViewSet, basename='archive-shows')
 
 urlpatterns = [
     # Auth

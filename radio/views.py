@@ -3,20 +3,21 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.views import APIView
 from django.db.models import F
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
 from .models import (
     LiveStream, Show, Podcast, NewsArticle, Banner,
     WebinarRegistration, TeamMember, Promotion, Transaction, Comment, WebinarEvent,
-    PasswordResetOTP, BroadcastNotification
+    PasswordResetOTP, BroadcastNotification, ArchiveShow
 )
 from .serializers import (
     LiveStreamSerializer, ShowSerializer, PodcastSerializer, 
     NewsArticleSerializer, BannerSerializer, WebinarRegistrationSerializer, 
     TeamMemberSerializer, PromotionSerializer, TransactionSerializer, 
-    WebinarEventSerializer, CommentSerializer, BroadcastNotificationSerializer
+    WebinarEventSerializer, CommentSerializer, BroadcastNotificationSerializer,
+    ArchiveShowSerializer
 )
 import threading
 from django.core.mail import send_mail, EmailMultiAlternatives
@@ -360,6 +361,11 @@ class BroadcastNotificationViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = BroadcastNotificationSerializer
     authentication_classes = []
     permission_classes = [permissions.AllowAny]
+class ArchiveShowViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ArchiveShow.objects.all().order_by('-date_aired')
+    serializer_class = ArchiveShowSerializer
+    authentication_classes = []
+    permission_classes = [permissions.AllowAny]
 
 # --- Promotions & Payments ---
 
@@ -557,3 +563,5 @@ def get_object_or_404(model, **kwargs):
         return model.objects.get(**kwargs)
     except model.DoesNotExist:
         raise Http404("No matching object found")
+def landing_page(request):
+    return render(request, 'radio/landing.html')

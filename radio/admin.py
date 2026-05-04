@@ -4,7 +4,7 @@ from unfold.decorators import display as unfold_display
 from .models import (
     LiveStream, Show, Podcast, NewsArticle, Banner,
     WebinarRegistration, TeamMember, Promotion, Transaction, WebinarEvent, Comment, Day,
-    BroadcastNotification
+    BroadcastNotification, ArchiveShow, PlatformAnalytics
 )
 
 @admin.register(Day)
@@ -108,3 +108,18 @@ class BroadcastNotificationAdmin(ModelAdmin):
     list_filter = ('notify_type', 'created_at')
     search_fields = ('title', 'body')
 
+@admin.register(ArchiveShow)
+class ArchiveShowAdmin(ModelAdmin):
+    list_display = ('title', 'presenter', 'date_aired', 'created_at')
+    list_filter = ('date_aired',)
+    search_fields = ('title', 'presenter__name')
+
+@admin.register(PlatformAnalytics)
+class PlatformAnalyticsAdmin(ModelAdmin):
+    list_display = ('platform', 'views', 'last_updated')
+    list_filter = ('platform',)
+    search_fields = ('platform',)
+    
+    def has_add_permission(self, request):
+        # Prevent adding new platforms manually if we only have 3, but let's allow it for now or just limit to the existing choices.
+        return super().has_add_permission(request)

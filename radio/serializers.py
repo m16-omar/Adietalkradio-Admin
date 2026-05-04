@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import (
     LiveStream, Show, Podcast, NewsArticle, Banner,
     WebinarRegistration, TeamMember, Promotion, Transaction, WebinarEvent, Comment, Day,
-    BroadcastNotification
+    BroadcastNotification, ArchiveShow
 )
 
 class WebinarEventSerializer(serializers.ModelSerializer):
@@ -215,3 +215,22 @@ class BroadcastNotificationSerializer(serializers.ModelSerializer):
         model = BroadcastNotification
         fields = ['id', 'title', 'body', 'notify_type', 'created_at']
 
+class ArchiveShowSerializer(serializers.ModelSerializer):
+    presenter = TeamMemberSerializer(read_only=True)
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ArchiveShow
+        fields = [
+            'id', 'title', 'description', 'date_aired', 
+            'audio_file', 'audio_url', 'image', 'image_url', 
+            'presenter', 'created_at'
+        ]
+
+    def get_image_url(self, obj):
+        if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
+            return obj.image.url
+        return ""

@@ -254,3 +254,38 @@ class BroadcastNotification(models.Model):
 
     def __str__(self):
         return f"[{self.notify_type}] {self.title}"
+
+class ArchiveShow(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    date_aired = models.DateField()
+    audio_file = models.FileField(upload_to='archive_shows/audio/', blank=True, null=True, help_text="Upload MP3 file of the previous show")
+    audio_url = models.URLField(blank=True, null=True, help_text="Or provide external audio URL")
+    image = models.ImageField(upload_to='archive_shows/covers/', blank=True, null=True)
+    presenter = models.ForeignKey(TeamMember, on_delete=models.SET_NULL, null=True, blank=True, related_name='archived_shows')
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.title} ({self.date_aired})"
+
+    class Meta:
+        verbose_name = "Archived Show"
+        verbose_name_plural = "Archived Shows"
+        ordering = ['-date_aired']
+
+class PlatformAnalytics(models.Model):
+    PLATFORM_CHOICES = [
+        ('web', 'Web'),
+        ('android', 'Android'),
+        ('ios', 'iOS'),
+    ]
+    platform = models.CharField(max_length=50, choices=PLATFORM_CHOICES, unique=True)
+    views = models.PositiveIntegerField(default=0)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.get_platform_display()} - {self.views} views"
+
+    class Meta:
+        verbose_name = "Platform Analytics"
+        verbose_name_plural = "Platform Analytics"

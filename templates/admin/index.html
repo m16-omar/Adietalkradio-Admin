@@ -5,14 +5,14 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block content %}
-<div class="flex flex-col gap-8">
+<div class="flex flex-col gap-8 pb-16 overflow-y-auto h-[calc(100vh-80px)] pr-2">
     <!-- Header with Breadcrumbs as in image -->
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Dashboard</h1>
-            <p class="text-sm text-gray-500">Welcome back to AdieTalkRadio Admin</p>
+            <h1 class="text-2xl font-bold text-base-800 dark:text-white">Dashboard</h1>
+            <p class="text-sm text-base-500">Welcome back to AdieTalkRadio Admin</p>
         </div>
-        <div class="flex items-center gap-2 text-sm text-gray-500">
+        <div class="flex items-center gap-2 text-sm text-base-500">
             <span class="material-symbols-outlined text-base">home</span>
             <span>/</span>
             <span class="font-medium text-primary-500">Dashboard</span>
@@ -22,7 +22,7 @@
     <!-- Stats Cards Row -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Total Shows Card -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div class="bg-white dark:bg-base-900 p-6 rounded-xl shadow-sm border border-base-200 dark:border-base-800 flex flex-col justify-between hover:shadow-md transition-shadow">
             <div class="flex items-center justify-between mb-4">
                 <div class="p-3 rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
                     <span class="material-symbols-outlined">calendar_month</span>
@@ -30,16 +30,16 @@
                 <span class="text-xs font-semibold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">+4.2%</span>
             </div>
             <div>
-                <h3 class="text-gray-500 text-sm font-medium">Total Shows</h3>
+                <h3 class="text-base-500 text-sm font-medium">Total Shows</h3>
                 <p class="text-2xl font-bold mt-1">{{ total_shows }}</p>
-                <div class="mt-4 w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                <div class="mt-4 w-full bg-base-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
                     <div class="bg-blue-500 h-full w-[70%]"></div>
                 </div>
             </div>
         </div>
 
         <!-- Total Podcasts Card -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div class="bg-white dark:bg-base-900 p-6 rounded-xl shadow-sm border border-base-200 dark:border-base-800 flex flex-col justify-between hover:shadow-md transition-shadow">
             <div class="flex items-center justify-between mb-4">
                 <div class="p-3 rounded-lg bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400">
                     <span class="material-symbols-outlined">mic</span>
@@ -47,16 +47,16 @@
                 <span class="text-xs font-semibold text-red-500 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded-full">-1.5%</span>
             </div>
             <div>
-                <h3 class="text-gray-500 text-sm font-medium">Total Podcasts</h3>
+                <h3 class="text-base-500 text-sm font-medium">Total Podcasts</h3>
                 <p class="text-2xl font-bold mt-1">{{ total_podcasts }}</p>
-                <div class="mt-4 w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                <div class="mt-4 w-full bg-base-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
                     <div class="bg-purple-500 h-full w-[45%]"></div>
                 </div>
             </div>
         </div>
 
         <!-- News Articles Card -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div class="bg-white dark:bg-base-900 p-6 rounded-xl shadow-sm border border-base-200 dark:border-base-800 flex flex-col justify-between hover:shadow-md transition-shadow">
             <div class="flex items-center justify-between mb-4">
                 <div class="p-3 rounded-lg bg-orange-50 text-orange-600 dark:bg-orange-900/20 dark:text-orange-400">
                     <span class="material-symbols-outlined">article</span>
@@ -64,16 +64,16 @@
                 <span class="text-xs font-semibold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">+12%</span>
             </div>
             <div>
-                <h3 class="text-gray-500 text-sm font-medium">News Articles</h3>
+                <h3 class="text-base-500 text-sm font-medium">News Articles</h3>
                 <p class="text-2xl font-bold mt-1">{{ total_news }}</p>
-                <div class="mt-4 w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                <div class="mt-4 w-full bg-base-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
                     <div class="bg-orange-500 h-full w-[85%]"></div>
                 </div>
             </div>
         </div>
 
         <!-- Webinar Registrations Card -->
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div class="bg-white dark:bg-base-900 p-6 rounded-xl shadow-sm border border-base-200 dark:border-base-800 flex flex-col justify-between hover:shadow-md transition-shadow">
             <div class="flex items-center justify-between mb-4">
                 <div class="p-3 rounded-lg bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400">
                     <span class="material-symbols-outlined">how_to_reg</span>
@@ -81,9 +81,9 @@
                 <span class="text-xs font-semibold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">+8.1%</span>
             </div>
             <div>
-                <h3 class="text-gray-500 text-sm font-medium">Registrations</h3>
+                <h3 class="text-base-500 text-sm font-medium">Registrations</h3>
                 <p class="text-2xl font-bold mt-1">{{ total_registrations }}</p>
-                <div class="mt-4 w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                <div class="mt-4 w-full bg-base-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
                     <div class="bg-primary-500 h-full w-[60%]"></div>
                 </div>
             </div>
@@ -93,70 +93,219 @@
     <!-- Main Content Grid (Chart + Side Cards) -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Analytics Chart (Simulation) -->
-        <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
-            <div class="flex items-center justify-between mb-8">
-                <h3 class="text-lg font-bold">Registration Analytics</h3>
-                <div class="flex gap-2">
-                    <button class="px-3 py-1 text-xs font-medium border rounded hover:bg-gray-50 active:bg-gray-100 transition-colors">Weekly</button>
-                    <button class="px-3 py-1 text-xs font-medium border rounded hover:bg-gray-50 active:bg-gray-100 transition-colors">Monthly</button>
+        <script>
+        function chartComponent() {
+            return {
+                view: 'weekly',
+                chartInstance: null,
+                weeklyLabels: {{ chart_labels|safe }},
+                weeklyData: {{ chart_data|safe }},
+                monthlyLabels: {{ monthly_labels|safe }},
+                monthlyData: {{ monthly_data|safe }},
+                initChart() {
+                    if (typeof Chart === 'undefined') {
+                        const script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+                        script.onload = () => this.renderChart();
+                        document.head.appendChild(script);
+                    } else {
+                        this.renderChart();
+                    }
+                },
+                renderChart() {
+                    const ctx = this.$refs.canvas.getContext('2d');
+                    
+                    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+                    gradient.addColorStop(0, 'rgba(192, 57, 43, 0.3)'); 
+                    gradient.addColorStop(1, 'rgba(192, 57, 43, 0.0)');
+
+                    this.chartInstance = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: this.weeklyLabels,
+                            datasets: [{
+                                label: 'Registrations',
+                                data: this.weeklyData,
+                                borderColor: '#C0392B',
+                                backgroundColor: gradient,
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4, 
+                                pointBackgroundColor: '#C0392B',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: '#C0392B',
+                                pointRadius: 4,
+                                pointHoverRadius: 6
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    backgroundColor: 'rgba(31, 41, 55, 0.9)',
+                                    titleColor: '#fff',
+                                    bodyColor: '#fff',
+                                    padding: 12,
+                                    cornerRadius: 8,
+                                    displayColors: false
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    grid: { display: false, drawBorder: false },
+                                    ticks: { color: '#9ca3af', font: { size: 11, weight: '500' } }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: 'rgba(156, 163, 175, 0.15)',
+                                        borderDash: [5, 5],
+                                        drawBorder: false
+                                    },
+                                    ticks: { color: '#9ca3af', font: { size: 11 }, padding: 10 }
+                                }
+                            }
+                        }
+                    });
+                },
+                updateChart() {
+                    if (!this.chartInstance) return;
+                    if (this.view === 'weekly') {
+                        this.chartInstance.data.labels = this.weeklyLabels;
+                        this.chartInstance.data.datasets[0].data = this.weeklyData;
+                    } else {
+                        this.chartInstance.data.labels = this.monthlyLabels;
+                        this.chartInstance.data.datasets[0].data = this.monthlyData;
+                    }
+                    this.chartInstance.update();
+                }
+            }
+        }
+        </script>
+        
+        <div x-data="chartComponent()" x-init="initChart()" class="lg:col-span-2 bg-white dark:bg-base-900 rounded-2xl shadow-sm border border-base-200 dark:border-base-800 p-6 flex flex-col">
+            
+            <div class="flex items-start sm:items-center justify-between mb-6 flex-col sm:flex-row gap-4">
+                <div>
+                    <h3 class="text-lg font-bold text-base-800 dark:text-white">Registration Analytics</h3>
+                    <p class="text-xs text-base-500 mt-1">Overview of new user registrations</p>
+                </div>
+                <div class="flex bg-base-50 dark:bg-base-900 p-1 rounded-lg border border-base-200 dark:border-base-800 self-start sm:self-auto">
+                    <button type="button" @click="view = 'weekly'; updateChart()" :class="view === 'weekly' ? 'bg-white dark:bg-base-800 text-base-800 dark:text-white shadow-sm border-base-200 dark:border-base-600' : 'text-base-500 hover:text-base-800 dark:hover:text-base-200 border-transparent'" class="px-4 py-1.5 text-xs font-semibold rounded-md transition-all border">Weekly</button>
+                    <button type="button" @click="view = 'monthly'; updateChart()" :class="view === 'monthly' ? 'bg-white dark:bg-base-800 text-base-800 dark:text-white shadow-sm border-base-200 dark:border-base-600' : 'text-base-500 hover:text-base-800 dark:hover:text-base-200 border-transparent'" class="px-4 py-1.5 text-xs font-medium rounded-md transition-all border">Monthly</button>
                 </div>
             </div>
             
-            <!-- Chart.js or SVG simulation -->
-            <div class="h-[300px] w-full relative flex items-end gap-2 px-2">
-                <!-- Simple SVG Placeholder for a nice trend chart -->
-                <svg viewBox="0 0 100 40" class="absolute inset-0 w-full h-[250px] opacity-20 text-primary-500" preserveAspectRatio="none">
-                    <path d="M0 40 L10 35 L20 38 L30 25 L40 28 L50 15 L60 18 L70 5 L80 12 L90 8 L100 15 L100 40 Z" fill="currentColor"></path>
-                    <path d="M0 40 L10 35 L20 38 L30 25 L40 28 L50 15 L60 18 L70 5 L80 12 L90 8 L100 15" fill="none" stroke="currentColor" stroke-width="0.5"></path>
-                </svg>
-                
-                <!-- Bar Chart Elements representing actual days -->
-                <div class="flex-1 bg-primary-100 dark:bg-primary-900/20 h-[40%] rounded-t relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded transition-opacity">12</div></div>
-                <div class="flex-1 bg-primary-200 dark:bg-primary-900/30 h-[60%] rounded-t relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded transition-opacity">19</div></div>
-                <div class="flex-1 bg-primary-300 dark:bg-primary-900/40 h-[10%] rounded-t relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded transition-opacity">3</div></div>
-                <div class="flex-1 bg-primary-400 dark:bg-primary-900/50 h-[25%] rounded-t relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded transition-opacity">8</div></div>
-                <div class="flex-1 bg-primary-500 h-[15%] rounded-t relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded transition-opacity">5</div></div>
-                <div class="flex-1 bg-primary-600 h-[10%] rounded-t relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded transition-opacity">3</div></div>
-                <div class="flex-1 bg-primary-700 h-[55%] rounded-t relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-gray-900 text-white text-[10px] px-2 py-0.5 rounded transition-opacity">17</div></div>
-            </div>
-            <div class="flex justify-between mt-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider px-2">
-                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            <div class="flex-1 relative w-full h-[280px] mt-2">
+                <canvas x-ref="canvas"></canvas>
             </div>
         </div>
 
         <!-- Latest Activity (What's New) as in image -->
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+        <div class="bg-white dark:bg-base-900 rounded-xl shadow-sm border border-base-200 dark:border-base-800 p-6">
             <h3 class="text-lg font-bold mb-6">Latest Activity</h3>
             <div class="space-y-6">
-                <div class="flex gap-4 items-start pb-6 border-b border-gray-50 dark:border-gray-700 last:border-0 last:pb-0">
+                <div class="flex gap-4 items-start pb-6 border-b border-base-50 dark:border-base-700 last:border-0 last:pb-0">
                     <div class="w-10 h-10 rounded-full bg-blue-100 flex-shrink-0 flex items-center justify-center text-blue-600">
                         <span class="material-symbols-outlined text-sm">person</span>
                     </div>
                     <div>
                         <p class="text-sm font-semibold">New Team Member Joined</p>
-                        <p class="text-xs text-gray-500 mt-0.5">John Michel has been added to the team.</p>
-                        <p class="text-[10px] text-gray-400 mt-2">2 hours ago</p>
+                        <p class="text-xs text-base-500 mt-0.5">John Michel has been added to the team.</p>
+                        <p class="text-[10px] text-base-400 mt-2">2 hours ago</p>
                     </div>
                 </div>
-                <div class="flex gap-4 items-start pb-6 border-b border-gray-50 dark:border-gray-700 last:border-0 last:pb-0">
+                <div class="flex gap-4 items-start pb-6 border-b border-base-50 dark:border-base-700 last:border-0 last:pb-0">
                     <div class="w-10 h-10 rounded-full bg-green-100 flex-shrink-0 flex items-center justify-center text-green-600">
                         <span class="material-symbols-outlined text-sm">mic</span>
                     </div>
                     <div>
                         <p class="text-sm font-semibold">Podcast Published</p>
-                        <p class="text-xs text-gray-500 mt-0.5">New episode: "Future of Radio" is live.</p>
-                        <p class="text-[10px] text-gray-400 mt-2">5 hours ago</p>
+                        <p class="text-xs text-base-500 mt-0.5">New episode: "Future of Radio" is live.</p>
+                        <p class="text-[10px] text-base-400 mt-2">5 hours ago</p>
                     </div>
                 </div>
-                <div class="flex gap-4 items-start pb-6 border-b border-gray-50 dark:border-gray-700 last:border-0 last:pb-0">
+                <div class="flex gap-4 items-start pb-6 border-b border-base-50 dark:border-base-700 last:border-0 last:pb-0">
                     <div class="w-10 h-10 rounded-full bg-red-100 flex-shrink-0 flex items-center justify-center text-red-600">
                         <span class="material-symbols-outlined text-sm">event</span>
                     </div>
                     <div>
                         <p class="text-sm font-semibold">Webinar Scheduled</p>
-                        <p class="text-xs text-gray-500 mt-0.5">Global Media Summit date updated.</p>
-                        <p class="text-[10px] text-gray-400 mt-2">Yesterday</p>
+                        <p class="text-xs text-base-500 mt-0.5">Global Media Summit date updated.</p>
+                        <p class="text-[10px] text-base-400 mt-2">Yesterday</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platform Views Section -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Web Views -->
+        <div class="bg-white dark:bg-base-900 p-6 rounded-xl shadow-sm border border-base-200 dark:border-base-800 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-3 rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
+                        <span class="material-symbols-outlined">language</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base-800 dark:text-white">Web</h3>
+                        <p class="text-xs text-base-500">Browser traffic</p>
+                    </div>
+                </div>
+                <span class="text-sm font-bold text-base-700 dark:text-base-200">{{ web_percent }}%</span>
+            </div>
+            <div>
+                <p class="text-2xl font-bold mt-1">{{ web_views }} <span class="text-xs text-base-400 font-normal">Listeners</span></p>
+                <div class="mt-4 w-full bg-base-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                    <div class="bg-blue-500 h-full rounded-full" style="width: {{ web_percent }}%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Android Views -->
+        <div class="bg-white dark:bg-base-900 p-6 rounded-xl shadow-sm border border-base-200 dark:border-base-800 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-3 rounded-lg bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400">
+                        <span class="material-symbols-outlined">android</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base-800 dark:text-white">Android</h3>
+                        <p class="text-xs text-base-500">App traffic</p>
+                    </div>
+                </div>
+                <span class="text-sm font-bold text-base-700 dark:text-base-200">{{ android_percent }}%</span>
+            </div>
+            <div>
+                <p class="text-2xl font-bold mt-1">{{ android_views }} <span class="text-xs text-base-400 font-normal">Listeners</span></p>
+                <div class="mt-4 w-full bg-base-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                    <div class="bg-green-500 h-full rounded-full" style="width: {{ android_percent }}%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- iOS Views -->
+        <div class="bg-white dark:bg-base-900 p-6 rounded-xl shadow-sm border border-base-200 dark:border-base-800 flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-3 rounded-lg bg-base-50 text-base-800 dark:bg-base-900/50 dark:text-white">
+                        <span class="material-symbols-outlined">phone_iphone</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base-800 dark:text-white">iOS</h3>
+                        <p class="text-xs text-base-500">App traffic</p>
+                    </div>
+                </div>
+                <span class="text-sm font-bold text-base-700 dark:text-base-200">{{ ios_percent }}%</span>
+            </div>
+            <div>
+                <p class="text-2xl font-bold mt-1">{{ ios_views }} <span class="text-xs text-base-400 font-normal">Listeners</span></p>
+                <div class="mt-4 w-full bg-base-100 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                    <div class="bg-base-900 dark:bg-gray-300 h-full rounded-full" style="width: {{ ios_percent }}%"></div>
                 </div>
             </div>
         </div>
