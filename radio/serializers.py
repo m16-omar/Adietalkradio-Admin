@@ -44,6 +44,9 @@ class TeamMemberSerializer(serializers.ModelSerializer):
 
     def get_image_url(self, obj):
         if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
             return obj.image.url
         return ""
 
@@ -58,14 +61,32 @@ class ShowSerializer(serializers.ModelSerializer):
     presenter = TeamMemberSerializer(read_only=True)
     day_of_week_display = serializers.SerializerMethodField()
     days = DaySerializer(many=True, read_only=True)
+    host_image_url = serializers.SerializerMethodField()
+    image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Show
         fields = [
             'id', 'show_name', 'show_type', 'host_name', 
-            'start_time', 'end_time', 'image', 'host_image_url',
+            'start_time', 'end_time', 'image', 'image_url', 'host_image_url',
             'days', 'day_of_week_display', 'is_active', 'presenter'
         ]
+
+    def get_image_url(self, obj):
+        if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
+            return obj.image.url
+        return ""
+
+    def get_host_image_url(self, obj):
+        if obj.presenter and obj.presenter.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.presenter.image.url)
+            return obj.presenter.image.url
+        return ""
 
     def get_day_of_week_display(self, obj):
         return ", ".join([day.name for day in obj.days.all()])
@@ -85,6 +106,9 @@ class PodcastSerializer(serializers.ModelSerializer):
 
     def get_image_url(self, obj):
         if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
             return obj.image.url
         return ""
 
@@ -122,6 +146,9 @@ class NewsArticleSerializer(serializers.ModelSerializer):
 
     def get_image_url(self, obj):
         if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
             return obj.image.url
         return ""
 
