@@ -7,12 +7,14 @@ from .models import (
 
 class WebinarEventSerializer(serializers.ModelSerializer):
     flyer_url = serializers.SerializerMethodField()
+    speaker_image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = WebinarEvent
         fields = [
             'id', 'title', 'description', 'date', 'time', 'platform', 
             'link', 'meeting_id', 'passcode', 'flyer_image', 'flyer_url', 
+            'speaker_name', 'speaker_role', 'speaker_image', 'speaker_image_url',
             'is_active', 'created_at'
         ]
 
@@ -22,6 +24,14 @@ class WebinarEventSerializer(serializers.ModelSerializer):
             if request:
                 return request.build_absolute_uri(obj.flyer_image.url)
             return obj.flyer_image.url
+        return ""
+
+    def get_speaker_image_url(self, obj):
+        if obj.speaker_image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.speaker_image.url)
+            return obj.speaker_image.url
         return ""
 
 class LiveStreamSerializer(serializers.ModelSerializer):

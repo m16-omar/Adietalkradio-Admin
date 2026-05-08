@@ -214,6 +214,9 @@ class WebinarEvent(models.Model):
     meeting_id = models.CharField(max_length=100, blank=True, null=True)
     passcode = models.CharField(max_length=100, blank=True, null=True)
     flyer_image = models.ImageField(upload_to='webinars/', blank=True, null=True)
+    speaker_name = models.CharField(max_length=255, blank=True, null=True, default="Prof. Adie Jumbo")
+    speaker_role = models.CharField(max_length=255, blank=True, null=True)
+    speaker_image = models.ImageField(upload_to='webinars/speakers/', blank=True, null=True)
     is_active = models.BooleanField(default=True, help_text="Only one webinar should be active at a time")
     created_at = models.DateTimeField(auto_now_add=True)
 

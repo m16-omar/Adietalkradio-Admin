@@ -60,6 +60,34 @@ def send_background_promotion_emails(user_data, admin_data):
     except Exception as e:
         print(f"[Background Email Error] Failed to send: {e}")
 
+def send_background_webinar_emails(user_data, admin_data):
+    """
+    Sends both user and admin emails for webinar registration in a background thread.
+    """
+    try:
+        # 1. Send User Confirmation
+        msg_user = EmailMultiAlternatives(
+            user_data['subject'], 
+            user_data['text'], 
+            user_data['from'], 
+            [user_data['to']]
+        )
+        msg_user.attach_alternative(user_data['html'], "text/html")
+        msg_user.send()
+
+        # 2. Send Admin Notification
+        msg_admin = EmailMultiAlternatives(
+            admin_data['subject'], 
+            admin_data['text'], 
+            admin_data['from'], 
+            [admin_data['to']]
+        )
+        # msg_admin.attach_alternative(admin_data['html'], "text/html") # Optional for admin
+        msg_admin.send()
+        
+    except Exception as e:
+        print(f"[Background Webinar Email Error] Failed to send: {e}")
+
 # --- Authentication Views ---
 
 class ActiveWebinarEventView(APIView):
@@ -69,14 +97,17 @@ class ActiveWebinarEventView(APIView):
         active_event = WebinarEvent.objects.filter(is_active=True).first()
         if active_event:
             return Response({
+                "id": active_event.id,
                 "title": active_event.title,
                 "description": active_event.description,
                 "flyer_url": request.build_absolute_uri(active_event.flyer_image.url) if active_event.flyer_image else None,
+                "speaker_name": active_event.speaker_name,
+                "speaker_role": active_event.speaker_role,
+                "speaker_image_url": request.build_absolute_uri(active_event.speaker_image.url) if active_event.speaker_image else None,
                 "date": active_event.date,
                 "time": active_event.time,
                 "platform": active_event.platform,
                 "passcode": active_event.passcode,
-                "flyer_url": request.build_absolute_uri(active_event.flyer_image.url) if active_event.flyer_image else None,
                 "is_active": active_event.is_active
             }, status=status.HTTP_200_OK)
         return Response({"error": "No active webinar found"}, status=status.HTTP_404_NOT_FOUND)
@@ -494,69 +525,81 @@ class WebinarRegisterView(APIView):
         registration = serializer.save()
 
         # Get the webinar event details for confirmation
-        active_webinar = registration.webinar or WebinarEvent.objects.filter(is_active=True).first()
-        if active_webinar:
-            event_title = active_webinar.title
-            event_date = active_webinar.date
-            event_time = active_webinar.time
-            event_link = active_webinar.link
-            meeting_id = active_webinar.meeting_id or ""
-            passcode = active_webinar.passcode or ""
+        target_webinar = registration.webinar or WebinarEvent.objects.filter(is_active=True).first()
+        if target_webinar:
+            event_title = target_webinar.title
+            event_date  = target_webinar.date or "TBA"
+            event_time  = target_webinar.time or "TBA"
+            event_link  = target_webinar.link or "https://zoom.us"
+            meeting_id  = target_webinar.meeting_id or "—"
+            passcode    = target_webinar.passcode or "—"
         else:
-            event_title = "Adietalk Webinar"
-            event_date = "Saturday, February 22, 2026"
-            event_time = "11AM (EST) & 5PM (WAT)"
-            event_link = "https://us02web.zoom.us/j/86074316637?pwd=UVJqSzd6c21xZEhFcHdDaHlmMndBZz09"
-            meeting_id = "813 0543 1064"
-            passcode   = "392742"
+            event_title = "Upcoming Webinar"
+            event_date  = "Check website for dates"
+            event_time  = "TBA"
+            event_link  = "https://adietalkradio.com/webinars"
+            meeting_id  = "813 0543 1064"
+            passcode    = "392742"
 
-        try:
-            # Send email to the user
-            send_mail(
-                subject=f"You're Registered! — {event_title}",
-                message=(
-                    f"Hi {registration.name},\n\n"
-                    f"You're registered!\n\n"
-                    f"Date: {event_date}\n"
-                    f"Time: {event_time}\n"
-                    f"Link: {event_link}\n"
-                    f"Meeting ID: {meeting_id}\n"
-                    f"Passcode: {passcode}\n\n"
-                    "See you there!\n— The Adietalk Team"
-                ),
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[registration.email],
-                html_message=f"""
-                    <h2>🎉 You're Registered!</h2>
+        # Prepare email data (Using simplified from address for better reliability)
+        from_email = settings.EMAIL_HOST_USER 
+        
+        user_email_data = {
+            'subject': f"You're Registered! — {event_title}",
+            'to': registration.email,
+            'from': from_email,
+            'text': (
+                f"Hi {registration.name},\n\n"
+                f"You're registered!\n\n"
+                f"Date: {event_date}\n"
+                f"Time: {event_time}\n"
+                f"Link: {event_link}\n"
+                f"Meeting ID: {meeting_id}\n"
+                f"Passcode: {passcode}\n\n"
+                "See you there!\n— The Adietalk Team"
+            ),
+            'html': f"""
+                <div style="font-family: sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px; border-radius: 10px;">
+                    <h2 style="color: #c0392b;">🎉 You're Registered!</h2>
                     <p>Hi <strong>{registration.name}</strong>,</p>
-                    <p><b>Event:</b> {event_title}</p>
-                    <p><b>Date:</b> {event_date}</p>
-                    <p><b>Time:</b> {event_time}</p>
-                    <p><b>Meeting ID:</b> {meeting_id}</p>
-                    <p><b>Passcode:</b> {passcode}</p>
-                    <a href="{event_link}" style="background:#c0392b;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;">Join Webinar</a>
-                    <p>See you there! — The Adietalk Team</p>
-                """,
-                fail_silently=False,
-            )
+                    <p>You have successfully registered for our upcoming webinar.</p>
+                    <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                        <p style="margin: 5px 0;"><b>Event:</b> {event_title}</p>
+                        <p style="margin: 5px 0;"><b>Date:</b> {event_date}</p>
+                        <p style="margin: 5px 0;"><b>Time:</b> {event_time}</p>
+                        <p style="margin: 5px 0;"><b>Meeting ID:</b> {meeting_id}</p>
+                        <p style="margin: 5px 0;"><b>Passcode:</b> {passcode}</p>
+                    </div>
+                    <div style="text-align: center; margin: 30px 0;">
+                        <a href="{event_link}" style="background:#c0392b; color:white; padding:15px 30px; border-radius:8px; text-decoration:none; font-weight: bold; display: inline-block;">Join Webinar Now</a>
+                    </div>
+                    <p style="color: #666; font-size: 14px;">If the button above doesn't work, copy and paste this link into your browser:<br>{event_link}</p>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+                    <p>See you there! <br>— The Adietalk Team</p>
+                </div>
+            """
+        }
 
-            # Send email notification to Admin
-            send_mail(
-                subject=f"New Webinar Registration: {registration.name}",
-                message=(
-                    f"A new user has registered for the webinar. Here are their details:\n\n"
-                    f"Name: {registration.name}\n"
-                    f"Email: {registration.email}\n"
-                    f"Phone: {registration.phone}\n"
-                    f"Organization: {registration.organization}\n"
-                    f"Interest: {registration.interested}\n"
-                ),
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.EMAIL_HOST_USER], # Add admin emails here
-                fail_silently=False,
+        admin_email_data = {
+            'subject': f"New Webinar Registration: {registration.name}",
+            'to': settings.EMAIL_HOST_USER,
+            'from': from_email,
+            'text': (
+                f"A new user has registered for the webinar. Here are their details:\n\n"
+                f"Name: {registration.name}\n"
+                f"Email: {registration.email}\n"
+                f"Phone: {registration.phone}\n"
+                f"Organization: {registration.organization}\n"
+                f"Interest: {registration.interested}\n"
+                f"Webinar: {event_title}\n"
             )
-        except Exception as e:
-            print(f"[Email Error] {e}")  # Log but don't block registration
+        }
+
+        # Send emails in background
+        threading.Thread(
+            target=send_background_webinar_emails,
+            args=(user_email_data, admin_email_data)
+        ).start()
 
         return Response({'message': 'Registration successful!'}, status=status.HTTP_201_CREATED)
 
