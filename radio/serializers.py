@@ -54,7 +54,8 @@ class TeamMemberSerializer(serializers.ModelSerializer):
         return {
             "twitter": obj.twitter_url,
             "instagram": obj.instagram_url,
-            "linkedin": obj.linkedin_url
+            "linkedin": obj.linkedin_url,
+            "facebook": obj.facebook_url
         }
 
 class ShowSerializer(serializers.ModelSerializer):
@@ -220,7 +221,7 @@ class TransactionSerializer(serializers.ModelSerializer):
 class WebinarRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model  = WebinarRegistration
-        fields = ['name', 'email', 'organization', 'phone', 'interested']
+        fields = ['webinar', 'name', 'email', 'organization', 'phone', 'interested']
 
 class BannerSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()

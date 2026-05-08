@@ -34,7 +34,12 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost', '187.124.218.83', 'adietalkradio.com', '.adietalkradio.com'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost', '187.124.218.83', 'adietalkradio.com', '.adietalkradio.com', 'api.adietalk.com'])
+
+# Recognize HTTPS through proxy
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+SECURE_SSL_REDIRECT = False # Let Nginx handle redirection
 
 
 # Application definition

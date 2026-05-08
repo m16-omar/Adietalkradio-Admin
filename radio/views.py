@@ -480,18 +480,21 @@ class WebinarRegisterView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
+        webinar_id = request.data.get('webinar')
+        email = request.data.get('email')
+        
+        if WebinarRegistration.objects.filter(email=email, webinar_id=webinar_id).exists():
+            return Response({'error': 'You have already registered for this webinar.'}, status=status.HTTP_409_CONFLICT)
+
         serializer = WebinarRegistrationSerializer(data=request.data)
+
         if not serializer.is_valid():
             return Response({'error': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-        email = serializer.validated_data['email']
-        if WebinarRegistration.objects.filter(email=email).exists():
-            return Response({'error': 'This email is already registered.'}, status=status.HTTP_409_CONFLICT)
-
         registration = serializer.save()
 
-        # Try to get the active webinar event, fallback to default values
-        active_webinar = WebinarEvent.objects.filter(is_active=True).first()
+        # Get the webinar event details for confirmation
+        active_webinar = registration.webinar or WebinarEvent.objects.filter(is_active=True).first()
         if active_webinar:
             event_title = active_webinar.title
             event_date = active_webinar.date

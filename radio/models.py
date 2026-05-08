@@ -27,6 +27,7 @@ class TeamMember(models.Model):
     twitter_url = models.URLField(blank=True, null=True)
     instagram_url = models.URLField(blank=True, null=True)
     linkedin_url = models.URLField(blank=True, null=True)
+    facebook_url = models.URLField(blank=True, null=True)
     
     def __str__(self):
         return f"{self.name} - {self.role}"
@@ -180,15 +181,19 @@ class Transaction(models.Model):
         return f"{self.gateway} - {self.reference} - {self.status}"
 
 class WebinarRegistration(models.Model):
+    webinar       = models.ForeignKey('WebinarEvent', on_delete=models.CASCADE, related_name='registrations', null=True, blank=True)
     name          = models.CharField(max_length=255)
-    email         = models.EmailField(unique=True)
+    email         = models.EmailField()
     organization  = models.CharField(max_length=255)
     phone         = models.CharField(max_length=50)
     interested    = models.TextField(blank=True)
     registered_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('email', 'webinar')
+
     def __str__(self):
-        return f"{self.name} <{self.email}>"
+        return f"{self.name} registered for {self.webinar.title if self.webinar else 'General'}"
 
 class Banner(models.Model):
     title = models.CharField(max_length=150, help_text="For internal reference")
