@@ -9,9 +9,9 @@ from .views import (
     PodcastViewSet, NewsArticleViewSet, BannerViewSet,
     TeamMemberViewSet, PromotionSubmitView, PaymentInitializeView, 
     PaymentVerifyView, WebinarRegisterView, UserRegistrationView,
-    GoogleAuthView, ActiveWebinarEventView, PastWebinarEventsView, CustomLoginView,
+    ActiveWebinarEventView, PastWebinarEventsView, CustomLoginView,
     PasswordResetRequestView, PasswordResetConfirmView, BroadcastNotificationViewSet,
-    ArchiveShowViewSet
+    ArchiveShowViewSet, DeleteAccountView, GoogleAuthView
 )
 
 
@@ -33,6 +33,7 @@ urlpatterns = [
     path('auth/google/', GoogleAuthView.as_view(), name='auth_google'),
     path('auth/password-reset/', PasswordResetRequestView.as_view(), name='password_reset'),
     path('auth/password-reset-confirm/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('auth/delete-account/', DeleteAccountView.as_view(), name='auth_delete_account'),
     
     # Promotions & Payments
     path('promotions/submit/', PromotionSubmitView.as_view(), name='promotion_submit'),

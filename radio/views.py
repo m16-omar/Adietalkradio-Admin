@@ -190,6 +190,14 @@ class GoogleAuthView(APIView):
         id_token = request.data.get('id_token')
         return Response({"message": "Google Login Successful (Placeholder)", "id_token": id_token})
 
+class DeleteAccountView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        user.delete()
+        return Response({"message": "Account deleted successfully"}, status=status.HTTP_200_OK)
+
 class PasswordResetRequestView(APIView):
     permission_classes = [permissions.AllowAny]
 
